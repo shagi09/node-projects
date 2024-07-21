@@ -1,5 +1,6 @@
 const express=require('express');
 const mongoose=require('mongoose');
+const authroutes=require('./routes/authroutes');
 
 const app=express()
 
@@ -23,3 +24,4 @@ app.get('/',(req,res)=>{
 app.get('/smoothies',(req,res)=>{
     res.render('smoothies');
 })
+app.use(authroutes)
