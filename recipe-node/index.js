@@ -2,6 +2,8 @@ const express=require('express');
 const mongoose=require('mongoose');
 const authroutes=require('./routes/authroutes');
 
+
+
 const app=express()
 
 app.use(express.static('public'))

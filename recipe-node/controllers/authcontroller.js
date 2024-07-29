@@ -11,8 +11,10 @@ module.exports.SignUp_Post=async(req,res)=>{
         res.json(user);
 
     }
-    catch{
-        res.json('err creating user');
+    catch(err){
+        console.log(err)
+        res.send('error creating user')
+
 
     }
 
