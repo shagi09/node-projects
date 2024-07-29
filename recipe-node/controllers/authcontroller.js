@@ -1,4 +1,8 @@
 const User = require("../models/user");
+const error={
+    'email':'',
+    'password':''
+}
 
 module.exports.SignUp_Get=(req,res)=>{
     res.render('signup');
@@ -12,8 +16,18 @@ module.exports.SignUp_Post=async(req,res)=>{
 
     }
     catch(err){
-        console.log(err)
-        res.send('error creating user')
+        console.log(err.code)
+        if(err.code==11000){
+            res.send('email already registered')
+        }
+        if(err.message.includes('user validation failed')){
+            Object.values(err.errors).forEach(({properties})=>{
+                error[properties.path]=properties.message
+            })
+            res.send(error)
+
+        }
+
 
 
     }
