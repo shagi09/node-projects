@@ -1,1 +1,16 @@
 <h1>Log In</h1>
+<form action="">
+    <label for="email">Email</label>
+    <input type="text" name="email"><br>
+    <label for="password">Password</label>
+    <input type="text" name="password"><br>
+    <button type="submit">Login</button>
+</form>
+<script>
+    const form=document.querySelector('form');
+    form.addEventListener('submit',(e)=>{
+        e.preventDefault();
+        console.log(form.email.value)
+        console.log(form.password.value)
+    })
+</script>
