@@ -1,7 +1,15 @@
 const User = require("../models/user");
+const jwt=require('jsonwebtoken')
 const error={
     'email':'',
     'password':''
+}
+function createToken(id){
+    const secret='shalom secret';
+    const options = { expiresIn: '1h' };
+    return jwt.sign({id},secret,options)
+
+
 }
 
 module.exports.SignUp_Get=(req,res)=>{
@@ -12,6 +20,8 @@ module.exports.SignUp_Post=async(req,res)=>{
     const{email,password}=req.body
     try{
         const user=await User.create({email,password})
+        const token=createToken(user._id)
+        res.cookie('jwt',token,{httpOnly:true})
         res.json(user);
 
     }
