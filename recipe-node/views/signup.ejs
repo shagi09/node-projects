@@ -2,8 +2,10 @@
 <form action="">
     <label for="email">Email</label>
     <input type="text" name="email"><br>
+    <div class="emailerr"></div><br>
     <label for="password">Password</label>
     <input type="text" name="password"><br>
+    <div class="passerr"></div><br>
     <button type="submit">Signup</button>
 </form>
 
@@ -14,8 +16,14 @@
         e.preventDefault();
         const email=form.email.value
         const password=form.password.value
+        const passErr=document.querySelector('.passerr')
+        const emailErr=document.querySelector('.emailerr')
         try{
-            const result=await axios.post('/signup',{email,password})
+            const res=await axios.post('/signup',{email,password}) 
+            console.log(res.data)
+
+                passErr.textContent=res.data
+
 
         }
         catch(err){
