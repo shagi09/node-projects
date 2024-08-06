@@ -2,15 +2,36 @@
 <form action="">
     <label for="email">Email</label>
     <input type="text" name="email"><br>
+    <div class="emailerr"></div><br>
     <label for="password">Password</label>
     <input type="text" name="password"><br>
+    <div class="passerr"></div><br>
     <button type="submit">Login</button>
 </form>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+    const passErr=document.querySelector('.passerr')
+    const emailErr=document.querySelector('.emailerr')
     const form=document.querySelector('form');
-    form.addEventListener('submit',(e)=>{
+    form.addEventListener('submit',async(e)=>{
         e.preventDefault();
-        console.log(form.email.value)
-        console.log(form.password.value)
+
+        const email=form.email.value
+        const password=form.password.value
+
+        try{
+            const res=await axios.post('/login',{email,password}) 
+            const data = await response.data;
+            console.log(data)
+
+}
+        catch(err){
+            console.log(err)
+
+
+        }
     })
+
+
 </script>

@@ -11,23 +11,22 @@
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+    const passErr=document.querySelector('.passerr')
+    const emailErr=document.querySelector('.emailerr')
     const form=document.querySelector('form');
     form.addEventListener('submit',async(e)=>{
         e.preventDefault();
+
         const email=form.email.value
         const password=form.password.value
-        const passErr=document.querySelector('.passerr')
-        const emailErr=document.querySelector('.emailerr')
+
         try{
             const res=await axios.post('/signup',{email,password}) 
             console.log(res.data)
-
-                passErr.textContent=res.data
-
-
-        }
+}
         catch(err){
             console.log(err)
+
 
         }
     })

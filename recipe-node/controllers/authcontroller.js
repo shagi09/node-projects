@@ -1,5 +1,6 @@
 const User = require("../models/user");
 const jwt=require('jsonwebtoken')
+const bcrypt=require('bcrypt')
 const error={
     'email':'',
     'password':''
@@ -50,7 +51,20 @@ module.exports.LogIn_Get=(req,res)=>{
     res.render('login');
 
 }
-module.exports.LogIn_Post=(req,res)=>{
-    res.send('new login')
+module.exports.LogIn_Post = async (req, res) => {
+    const { email, password } = req.body;
+    try {
+      const user = await User.findOne({ email });
+      if (user) {
+        const isMatch = await bcrypt.compare(password, user.password);
+        if(isMatch){
+            return res.json({ userId: user._id });
+        }
+      }
+  
 
-}
+    } catch (err) {
+      console.error('Error in LogIn_Post:', err);
+      return res.status(500).json({ error: 'An unexpected error occurred during login' });
+    }
+  };
