@@ -22,15 +22,18 @@
 
         try{
             const res=await axios.post('/login',{email,password}) 
-            const data = await response.data;
+            const data = await res.data;
             console.log(data)
+            window.location.href = '/';
+
 
 }
-        catch(err){
-            console.log(err)
-
-
-        }
+catch (err) {
+    
+    
+      console.error(err);
+    
+  }
     })
 
 

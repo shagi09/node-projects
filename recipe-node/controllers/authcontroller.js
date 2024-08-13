@@ -59,15 +59,18 @@ module.exports.LogIn_Post = async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
         if(isMatch){
             const token=createToken(user._id)
-            res.cookie('login',token,{httpOnly:true})
-            return res.json({ userId: user._id });
+            res.cookie('login',token,{httpOnly:true,
+                maxAge: 1 * 60 * 60 * 1000 
+            })
+             res.redirect('/')
+
         }
         else{
-            return res.json('incorrect password')
+            return res.status(401).json('incorrect password')
         }
       }
       else{
-        return res.json('incorrect email')
+        return res.status(401).json('incorrect email')
       }
   
 
