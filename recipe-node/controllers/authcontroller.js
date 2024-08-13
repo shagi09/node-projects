@@ -79,3 +79,7 @@ module.exports.LogIn_Post = async (req, res) => {
       return res.status(500).json({ error: 'An unexpected error occurred during login' });
     }
   };
+  module.exports.LogOut_Get=(req,res)=>{
+    res.cookie('login','',{maxAge:1})
+    res.redirect('/')
+  }
